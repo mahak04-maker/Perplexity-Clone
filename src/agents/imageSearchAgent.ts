@@ -14,8 +14,6 @@ import {
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { searchSearxng } from "../lib/searxng.js";
 import { Document } from "@langchain/core/documents";
-// import { query } from "express";
-import computeSimilarity from "../utils/computeSimilarity.js";
 import eventEmitter from "events";
 import type { StreamEvent } from "@langchain/core/tracers/log_stream";
 import type { BaseChatModel } from "@langchain/core/language_models/chat_models";
@@ -125,43 +123,6 @@ const createBasicImageSearchAnsweringChain = (
       .join("\n");
   };
 
-  // const rerankDocs = async ({
-  //   query,
-  //   docs,
-  // }: {
-  //   query: string;
-  //   docs: Document[];
-  // }) => {
-  //   if (docs.length === 0) {
-  //     return docs;
-  //   }
-
-  //   const docsWithContent = docs.filter(
-  //     (doc) => doc.pageContent && doc.pageContent.length > 0
-  //   );
-
-  //   const [docEmbeddings, queryEmbedding] = await Promise.all([
-  //     embeddings.embedDocuments(docsWithContent.map((doc) => doc.pageContent)),
-  //     embeddings.embedQuery(query),
-  //   ]);
-
-  //   const similarity = docEmbeddings.map((docEmbedding, i) => {
-  //     const sim = computeSimilarity(queryEmbedding, docEmbedding);
-
-  //     return {
-  //       index: i,
-  //       similarity: sim,
-  //     };
-  //   });
-
-  //   const sortedDocs = similarity
-  //     .sort((a, b) => b.similarity - a.similarity)
-  //     .filter((sim) => sim.similarity > 0.5)
-  //     .slice(0, 15)
-  //     .map((sim) => docsWithContent[sim.index]);
-
-  //   return sortedDocs;
-  // };
 
   return RunnableSequence.from([
     RunnableMap.from({
