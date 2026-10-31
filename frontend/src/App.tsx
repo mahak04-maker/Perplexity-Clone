@@ -38,7 +38,7 @@ function App() {
   setError("");
 
   try {
-    const response = await fetch("http://localhost:3000/api/search", {
+    const response = await fetch("https://perplexity-clone-1-bw62.onrender.com/api/search", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
